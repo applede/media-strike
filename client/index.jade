@@ -1,0 +1,17 @@
+head
+  title Media Strike
+
+body
+  .container
+    h1 Media Strike
+
+    form.new-task.form-inline
+      .form-group
+        input.form-control(type="text",name="text",placeholder="Type to add new folder")
+      button.btn.btn-primary(type="submit") Add
+
+    +hello
+
+template(name="hello")
+  button Click me
+  p You've pressed the button <mark>#{counter}</mark> times

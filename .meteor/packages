@@ -7,3 +7,8 @@
 meteor-platform
 autopublish
 insecure
+coffeescript
+mquandalle:jade
+less
+stylus
+nemo64:bootstrap
