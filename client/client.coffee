@@ -1,16 +1,13 @@
-Session.setDefault "counter", 0
-
-Template.hello.helpers
-  counter: ->
-    return Session.get("counter")
-
-Template.hello.events
-  'click button': ->
-    Session.set("counter", Session.get("counter") + 1)
+Template.body.helpers
+  folders: ->
+    return Folders.find {}
 
 Template.body.events
-  "submit .new-task": (event) ->
+  "submit .new-folder": (event) ->
     text = event.target.text.value
+
+    Folders.insert
+      folder: text
 
     event.target.text.value = ""
 
