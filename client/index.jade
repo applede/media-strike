@@ -2,7 +2,7 @@ head
   title Media Strike
 
 body
-  nav.navbar.navbar-inverse
+  nav.navbar.navbar-inverse.navbar-fixed-top
     .container-fluid
       .navbar-header
         button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
@@ -14,25 +14,40 @@ body
       #bs-example-navbar-collapse-1.collapse.navbar-collapse
         ul.nav.navbar-nav
           li.active
-            a(href="#") Home
+            a(href="#") Settings
           li
             a(href="#") TV Shows
 
-  .container
-    h1 Media Strike
+  .container-fluid
+    h1 Settings
 
-    .btn-group-vertical(role="group", aria-label="...")
-      each folders
-        +folder
+    .row
+      .left
+        h4 TV Show Folders
+      .fixed-fluid
+        .btn-group-vertical(role="group", aria-label="...")
+          each folders
+            +folder
+        p
+          button.btn.btn-primary#add-folder(type="button") Add Folder
 
-    form.new-folder.form-inline
-      .form-group
-        input.form-control(type="text",name="text",placeholder="Type to add new folder")
-      button.btn.btn-primary(type="submit") Add
+    // form.new-folder.form-inline
+    //   .form-group
+    //     input.form-control(type="text",name="text",placeholder="Type to add new folder")
+    //   button.btn.btn-primary(type="submit") Add
 
 
 template(name="folder")
-  .input-group.folder-item
-    input.form-control(type="text", placeholder="Type to add folder", value="#{folder}")
-    span.input-group-addon
-      span.glyphicon.glyphicon-remove
+  // if editing_folder
+  //   input.form-control(type="text", placeholder="Type to add folder", value="#{folder}", id="#{_id}")
+  // else
+  .folder-entry.bg-info #{folder}
+    span.glyphicon.glyphicon-remove
+  // span.input-group-addon
+  //   span.glyphicon.glyphicon-remove
+
+template(name="folderDialog")
+  h4.current-folder.bg-info #{currentFolder}
+  each folders
+    .folder-entry #{folder}
+    // +folder
