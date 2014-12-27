@@ -1,36 +1,6 @@
 head
   title Media Strike
 
-body
-  nav.navbar.navbar-inverse.navbar-fixed-top
-    .container-fluid
-      .navbar-header
-        button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
-          span.sr-only Toggle navigation
-          span.icon-bar
-          span.icon-bar
-          span.icon-bar
-        a.navbar-brand(href="#") Media Strike
-      #bs-example-navbar-collapse-1.collapse.navbar-collapse
-        ul.nav.navbar-nav
-          li.active
-            a(href="#") Settings
-          li
-            a(href="#") TV Shows
-
-  .container-fluid
-    h1 Settings
-
-    .row
-      .left
-        h4 TV Show Folders
-      .fixed-fluid
-        .btn-group-vertical(role="group", aria-label="...")
-          each folders
-            +folder
-        p
-          button.btn.btn-primary#add-folder(type="button") Add Folder
-
     // form.new-folder.form-inline
     //   .form-group
     //     input.form-control(type="text",name="text",placeholder="Type to add new folder")
@@ -46,8 +16,68 @@ template(name="folder")
   // span.input-group-addon
   //   span.glyphicon.glyphicon-remove
 
-template(name="folderDialog")
-  h4.current-folder.bg-info #{currentFolder}
-  each folders
-    .folder-entry #{folder}
-    // +folder
+template(name="folder_dialog")
+  ol.breadcrumb
+    each folder_components
+      li
+        if root
+          a.folder-component
+            span.glyphicon.glyphicon-hdd
+        else
+          a.folder-component #{compo}
+    li.active #{last_component}
+
+  .list-group.pre-scrollable
+    each folders
+      if is_dir
+        a.list-group-item.folder.list-group-item-info #{folder}
+      else
+        a.list-group-item.disabled #{folder}
+
+template(name='layout')
+  header
+    +header
+
+  .container-fluid
+    +yield
+
+template(name='home')
+  | Home
+
+template(name='settings')
+  .container-fluid
+    h1 Settings
+
+    .row
+      .left
+        h4 TV Show Folders
+      .fixed-fixed
+        ul.list-group
+          each tvshow_folders
+            li.list-group-item
+              | #{folder}
+              span.badge.remove-folder
+                span.glyphicon.glyphicon-remove
+        div
+          button.btn.btn-primary#add-folder(type="button") Add Folder
+
+template(name='tvshows')
+  | TV Shows
+
+template(name='header')
+  nav.navbar.navbar-inverse.navbar-fixed-top
+    .container-fluid
+      .navbar-header
+        button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#bs-example-navbar-collapse-1")
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href="/") Media Strike
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          +menu_item(menu='settings' title='Settings')
+          +menu_item(menu='tvshows' title='TV Shows')
+template(name='menu_item')
+  li(class="{{active menu}}")
+    a(href="{{pathFor route=menu}}") #{title}
