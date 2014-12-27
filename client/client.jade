@@ -41,9 +41,6 @@ template(name='layout')
   .container-fluid
     +yield
 
-template(name='home')
-  | Home
-
 template(name='settings')
   .container-fluid
     h1 Settings
@@ -60,9 +57,6 @@ template(name='settings')
                 span.glyphicon.glyphicon-remove
         div
           button.btn.btn-primary#add-folder(type="button") Add Folder
-
-template(name='tvshows')
-  | TV Shows
 
 template(name='header')
   nav.navbar.navbar-inverse.navbar-fixed-top

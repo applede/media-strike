@@ -1,7 +1,8 @@
-share.folders = new Mongo.Collection("folders");
-share.tvshow_folders = new Mongo.Collection("tvshow_folders");
+@Folders = new Mongo.Collection("folders")
+@Tvshow_folders = new Mongo.Collection("tvshow_folders")
+@Tvshows = new Mongo.Collection("tvshows")
 
-share.join_path = (path, compo) ->
+@Join_path = (path, compo) ->
   if path.slice(-1) is '/'
     path + compo
   else

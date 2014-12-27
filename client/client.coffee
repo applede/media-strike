@@ -28,7 +28,7 @@ open_confirm_dialog = (title, message, callback) ->
 
 Template.settings.helpers
   tvshow_folders: ->
-    share.tvshow_folders.find({})
+    Tvshow_folders.find({})
 
 Template.settings.events
   'click #add-folder': (event) ->
@@ -62,7 +62,7 @@ Template.settings.events
 
 Template.folder_dialog.helpers
   folders: ->
-    share.folders.find {}
+    Folders.find({})
   current_folder: ->
     Session.get 'current_folder'
   folder_components: ->
@@ -70,7 +70,7 @@ Template.folder_dialog.helpers
     return unless folder
     path = ''
     folder.split('/')[0..-2].map (compo) ->
-      path = share.join_path(path, compo)
+      path = Join_path(path, compo)
       { compo: compo, path: path }
   last_component: ->
     folder = Session.get('current_folder')
@@ -106,6 +106,7 @@ Template.menu_item.helpers
 
 Meteor.subscribe('folders')
 Meteor.subscribe('tvshow_folders')
+Meteor.subscribe('tvshows')
 
 Router.configure
   layoutTemplate: 'layout'
