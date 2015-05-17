@@ -1,20 +1,21 @@
 processed = 0
 total = 1
-Mkdir(Real_path('.') + '/../../../../../public/tvshow')
-tvshow_image_folder = Real_path(Real_path('.') + '/../../../../../public/tvshow')
+tvshow_image_folder = Real_path('.') + '/../../../../../public/tvshow'
+Mkdir(tvshow_image_folder)
+tvshow_image_folder = Real_path(tvshow_image_folder)
 
 Meteor.methods
   scan_tvshows: ->
-    console.log 'scan_tvshows'
     Scan_tvshows()
   progress: ->
     processed * 100.0 / total
 
-@Scan_tvshows = () ->
+@Scan_tvshows = ->
   Tvshows.remove({})
   folders = Tvshow_folders.find({})
   folders.forEach (folder) ->
     Scan_tvshow_folder(folder.folder)
+  return
 
 @Scan_tvshow_folder = (parent_folder) ->
   folders = Read_dir(parent_folder)

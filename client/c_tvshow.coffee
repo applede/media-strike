@@ -1,6 +1,6 @@
 Template.tvshows.helpers
   tvshows: ->
-    Tvshows.find {}, {sort: ["name"]}
+    Tvshows.find({}, {sort: ["name"]})
 
 Template.tvshows.events
   'click #scan': (event) ->

@@ -40,26 +40,6 @@ Template.settings.events
     open_confirm_dialog 'Are you sure to remove the folder from TV Shows?', this.folder, ->
       Meteor.call 'remove_tvshow_folder', folder_id
 
-
-
-  # "click .folder-entry": (event, tmpl) ->
-  #   event.stopPropagation()
-  #   event.preventDefault()
-  #   Session.set 'editing_folder', this._id
-  #
-  # "submit .new-folder": (event) ->
-  #   text = event.target.text.value
-  #
-  #   share.folders.insert
-  #     folder: text
-  #
-  #   event.target.text.value = ""
-  #
-  #   return false
-
-# Template.folder.editing_folder = ->
-#   return Session.equals('editing_folder', this._id)
-
 Template.folder_dialog.helpers
   folders: ->
     Folders.find({})
@@ -107,6 +87,7 @@ Template.menu_item.helpers
 Meteor.subscribe('folders')
 Meteor.subscribe('tvshow_folders')
 Meteor.subscribe('tvshows')
+Meteor.subscribe('trans')
 
 Router.configure
   layoutTemplate: 'layout'
@@ -116,3 +97,8 @@ Router.route '/tvshows',
   name: 'tvshows'
 Router.route '/settings',
   name: 'settings'
+Router.route '/transmission',
+  name: 'transmission'
+  onBeforeAction: ->
+    Meteor.call('refresh_transmission')
+    this.next()

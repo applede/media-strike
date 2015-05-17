@@ -10,11 +10,10 @@ Meteor.startup ->
     Tvshow_folders.find({})
   Meteor.publish "tvshows", ->
     Tvshows.find({})
+  Meteor.publish 'trans', ->
+    Trans.find({})
 
 Meteor.methods
-  # folders: ->
-  #   ["a", "b"]
-  #
   current_folder: ->
     current_folder
 

@@ -1,5 +1,7 @@
 @Fs = Npm.require('fs')
 @Exec = Meteor.wrapAsync(Npm.require('child_process').exec)
+@Spawn = Npm.require('child_process').spawn
+@Future = Npm.require('fibers/future')
 
 @Is_dir = (folder) ->
   Fs.statSync(folder).isDirectory()
@@ -33,7 +35,7 @@
   #     Fs.writeFileSync(dst, data)
 
 @Mkdir = (path) ->
-  Exec "mkdir -p '#{path}'"
+  Exec("mkdir -p '#{path}'")
   # Exec "mkdir -p '#{path}'", (error, stdout, stderr) ->
   #   if error
   #     console.log('stdout: ' + stdout)

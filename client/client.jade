@@ -1,20 +1,9 @@
 head
   title Media Strike
 
-    // form.new-folder.form-inline
-    //   .form-group
-    //     input.form-control(type="text",name="text",placeholder="Type to add new folder")
-    //   button.btn.btn-primary(type="submit") Add
-
-
 template(name="folder")
-  // if editing_folder
-  //   input.form-control(type="text", placeholder="Type to add folder", value="#{folder}", id="#{_id}")
-  // else
   .folder-entry.bg-info #{folder}
     span.glyphicon.glyphicon-remove
-  // span.input-group-addon
-  //   span.glyphicon.glyphicon-remove
 
 template(name="folder_dialog")
   ol.breadcrumb
@@ -72,6 +61,8 @@ template(name='header')
         ul.nav.navbar-nav
           +menu_item(menu='settings' title='Settings')
           +menu_item(menu='tvshows' title='TV Shows')
+          +menu_item(menu='transmission' title='Transmission')
+
 template(name='menu_item')
   li(class="{{active menu}}")
     a(href="{{pathFor route=menu}}") #{title}
